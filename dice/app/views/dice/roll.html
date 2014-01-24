@@ -1,0 +1,74 @@
+<head>
+
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic' rel='stylesheet' type='text/css'>
+	
+	<style type="text/css">
+		p, h1, h2, h3, li, div { font-family: 'Source Sans Pro', sans-serif; }
+		h1 { font-size: 48; }
+		h2 { font-size: 32; }
+		h3 { font-size: 24; }
+		p  { font-size: 16; }
+		a  { text-decoration: none; }
+		body {
+			width: 620px;
+			margin: 0 auto;
+		}
+		.button {
+			text-align: center;
+			margin: 2em auto;
+			width:	200px;
+			height: 50px;
+			border: 1px solid black;
+			border-radius: 5px;
+			background-color: #0ff0f0
+		}
+		#dice {
+			padding-left: 20px;
+		}
+	</style>
+
+</head>
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
+
+<body>
+
+	<h1>THE GAME IS DICE.</h1><hr>
+
+	<% if session[:goal] == nil and session[:status] == nil %>
+
+		<h2>Welcome.</h2>
+		<p>Here are the rules:</p>
+		<ul>
+			<li>Roll the dice to start the game.</li>
+			<li>If your first roll is a 7 or 11, you win.</li>
+			<li>If your first roll is a 2, 3, or 12, you lose.</li>
+			<li>Anything else becomes your <em>goal</em>. Roll your goal again before rolling a 7, and you win. Roll a 7 instead of your goal, and you lose.</li>
+		</ul><br>
+		<a href="/dice"><div class="button"><h3>Roll to start the game!</h3></div></a>
+
+	<% else %>
+
+		<br>
+		<div id="dice">
+			<%= image_tag("d0#{@dice[0]}.png") %>
+			<%= image_tag("d0#{@dice[1]}.png") %>
+		</div>
+		<h2>You rolled <%= @sum %>.</h2>
+
+		<% if session[:status] == "win" or session[:status] == "lose" %>
+			<% if session[:status] == "win" %>
+				<h2>What skill! You won!</h2>
+			<% else %>
+				<h2>You lost. Nice going, champ.</h2>
+			<% end %>
+			<a href="/"><div class="button"><h3>Play again?</h3></div></a>
+		<% else %>
+			<h2>You need to roll another <%= session[:goal] %> to win. If you roll a 7, you lose.</h2>
+			<a href="/dice"><div class="button"><h3>Roll again?</h3></div></a>
+		<% end %>
+	
+	<% end %>
+
+</body>
+	
