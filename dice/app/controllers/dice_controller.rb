@@ -10,7 +10,7 @@ class DiceController < ApplicationController
 		@dice = [rand(1..6), rand(1..6)]
 		@sum = @dice[0] + @dice[1]
 		if session[:goal] == nil and session[:status] == nil	# first roll:
-			if @sum == 7 or @sum == 11							# win if roll 7 or 11 first time
+			if @sum == 7 or @sum == 11                          # win if roll 7 or 11 first time
 				session[:status] = "win"
 			elsif @sum == 2 or @sum == 3 or @sum == 12			# lose if roll 2, 3, or 12 first time
 				session[:status] = "lose"
