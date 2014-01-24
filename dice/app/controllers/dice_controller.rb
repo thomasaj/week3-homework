@@ -1,6 +1,6 @@
 class DiceController < ApplicationController
 
-	def new_game				# establish session variables and initialize to nil for first check in view
+	def new_game	# establish session variables and initialize to nil for first check in view
 		session[:goal] = nil							
 		session[:status] = nil
 		render "roll"
