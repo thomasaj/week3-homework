@@ -35,7 +35,7 @@
 
 	<h1>THE GAME IS DICE.</h1><hr>
 
-	<% if session[:goal] == nil and session[:status] == nil %>
+	<% if @goal == nil and @status == nil %>
 
 		<h2>Welcome.</h2>
 		<p>Here are the rules:</p>
@@ -45,7 +45,7 @@
 			<li>If your first roll is a 2, 3, or 12, you lose.</li>
 			<li>Anything else becomes your <em>goal</em>. Roll your goal again before rolling a 7, and you win. Roll a 7 instead of your goal, and you lose.</li>
 		</ul><br>
-		<a href="/dice"><div class="button"><h3>Roll to start the game!</h3></div></a>
+		<div class="button"><h3><%= link_to "Roll to start the game!", "/dice" %></h3></div>
 
 	<% else %>
 
@@ -56,16 +56,16 @@
 		</div>
 		<h2>You rolled <%= @sum %>.</h2>
 
-		<% if session[:status] == "win" or session[:status] == "lose" %>
-			<% if session[:status] == "win" %>
+		<% if @status == "win" or @status == "lose" %>
+			<% if @status == "win" %>
 				<h2>What skill! You won!</h2>
 			<% else %>
 				<h2>You lost. Nice going, champ.</h2>
 			<% end %>
 			<a href="/"><div class="button"><h3>Play again?</h3></div></a>
 		<% else %>
-			<h2>You need to roll another <%= session[:goal] %> to win. If you roll a 7, you lose.</h2>
-			<a href="/dice"><div class="button"><h3>Roll again?</h3></div></a>
+			<h2>You need to roll another <%= @goal %> to win. If you roll a 7, you lose.</h2>
+			<div class="button"><h3><%= link_to "Roll again?", "/dice?goal=#{@goal}&status=#{@status}" %></h3></div>
 		<% end %>
 	
 	<% end %>
