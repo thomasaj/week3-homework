@@ -1,8 +1,8 @@
 class DiceController < ApplicationController
 
-	def new_game # establish session variables and initialize to nil for first check in view
-		session[:goal] = nil							
-		session[:status] = nil
+	def new_game # establish state variables and initialize to nil
+		@goal = nil							
+		@status = nil
 		render "roll"
 	end
 
@@ -12,7 +12,7 @@ class DiceController < ApplicationController
 
 		# inspect url for query string params
 		if params.has_key?(:goal) and params.has_key?(:status)
-			@goal = params[:goal]
+			@goal = params[:goal].to_i
 			@status = params[:status]
 		end
 
@@ -30,6 +30,7 @@ class DiceController < ApplicationController
 				@status = "win"		# => win if you roll goal.
 			elsif @sum == 7			# => lose if roll 7.
 				@status = "lose"	# => stay in the hunt otherwise
+			end
 		end
 		render "roll"
 	end

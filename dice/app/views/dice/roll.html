@@ -62,7 +62,7 @@
 			<% else %>
 				<h2>You lost. Nice going, champ.</h2>
 			<% end %>
-			<a href="/"><div class="button"><h3>Play again?</h3></div></a>
+			<div class="button"><h3><%= link_to "Play again?", "/" %></h3></div>
 		<% else %>
 			<h2>You need to roll another <%= @goal %> to win. If you roll a 7, you lose.</h2>
 			<div class="button"><h3><%= link_to "Roll again?", "/dice?goal=#{@goal}&status=#{@status}" %></h3></div>
